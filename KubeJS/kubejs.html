@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<head lang="ja">
+  <title>KubeJS</title>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js" type="text/javascript">
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4533212068219298"
+  crossorigin="anonymous"></script>
+  <script>
+  $(document).ready(function(){
+  
+    $(window).keydown(function(event) {
+  
+      var code = (event.keyCode ? event.keyCode : event.which);
+      if (!(code == 83 && event.ctrlKey)) return true;
+      event.preventDefault();
+      $("form input[name=none]").click();
+      return false;
+    });
+  }); 
+  </script>
+  <meta charset="utf-8">
+  <style>
+    /*style*/
+    .youtube-button {
+            background-color: #ff0000; 
+            color: #ffffff; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            text-decoration: none; 
+            left: 90%;
+            }
+            .youtube-button:hover {
+            background-color: #bb0000;
+            }
+
+            .x-button {
+            display: inline-block;
+            background-color: #444;
+            color: #ffffff; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            text-decoration: none; 
+            }
+            .x-button:hover {
+                background-color: #333; 
+            }
+            .footer{
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #222;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            }
+    body{
+      background-color: #f7f7ef;
+    }
+    .line {
+      width: 100%;
+      height: 2px;
+      background-color: #323232;
+    }
+    p {
+      margin-bottom: -17px;
+      margin-top: -17px;
+    }
+    pre {
+    border: 2.5px solid #ccc;
+    padding: 10px;
+    background-color: #f7f7f7;
+    font-family: monospace;
+    font-size: 16px;
+    max-width: 100%;
+    overflow: scroll;
+  }
+    li.c {
+      color: rgb(25, 0, 0);
+      font-size: 18px;
+    }
+    h3.bold {
+      font-size: 40px;
+      margin-top: -3px;
+      margin-bottom: -5px;
+    }
+    h3.boldIE {
+      font-size: 40px;
+      margin-top: -3px;
+      margin-bottom: -5px;
+      -webkit-text-stroke: 1.5px black;
+    }
+    .green {
+      color: rgb(0, 200, 0);
+      -webkit-text-stroke: 0.5px black;
+  }
+  .create {
+      -webkit-text-stroke: 1.5px rgb(116, 80, 48);
+      font-size: 40px;
+      margin-top: -3px;
+      margin-bottom: -5px;
+  }
+  /*menu*/
+  .menu {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                background-color: #333;
+                overflow: hidden;
+            }
+            .menu li {
+                float: left;
+            }
+            .menu li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+            .menu li a:hover {
+                background-color: #555;
+            }
+  </style>
+</head>
+<body><!-------------------------------body------------------------------------------>
+  <ul class="menu">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../storage.html">Storage</a></li>
+    <li><a href="../links.html">Links</a></li>
+</ul>
+  <h2>KubeJSレシピ保管所</h2>
+  <br><br>
+  <img src="p/KubeJS.png" alt="KubeJS" width="175px" height="175px">
+  <br><br><!------------------------------------------------->
+  <p>Can I reload scripts?</p>
+  <br>
+  <ul>
+    <li class="c">startup_scripts/: Restart the game or use /kubejs reload startup_scripts. Not everything is reloadable - some things require you to restart the game (e.g. registries) or the world (e.g. worldgen).
+    </li>
+    <li class="c">server_scripts/: Use /reload to reload scripts, recipes, tags and all data or /kubejs reload server_scripts to reload scripts only
+    </li>
+    <li class="c">client_scripts/: Use F3 + T to reload scripts and assets or /kubejs reload client_scripts to reload scripts only
+    </li>
+  </ul>
+  <p>crafting</p>
+  <pre>
+  event.shaped(
+  Item.of('minecraft:stone', 3), <span class="green">// arg 1: output</span>
+  [ 
+    'A B', 
+    ' C ', <span class="green">// arg 2: the shape (array of strings)</span>
+    'B A'  
+  ],
+  {
+    A: 'minecraft:andesite', 
+    B: 'minecraft:diorite',  <span class="green">//arg 3: the mapping object</span>
+    C: 'minecraft:granite'   
+  }
+)</pre>
+  <p>Smelting & Cooking</p>
+  <pre>
+<span class="green">// Cook 1 stone into 3 gravel in a Furnace:</span>
+event.smelting('3x minecraft:gravel', 'minecraft:stone')
+<span class="green">// Blast 1 iron ingot into 10 nuggets in a Blast Furnace:</span>
+event.blasting('10x minecraft:iron_nugget', 'minecraft:iron_ingot')
+<span class="green">// Smoke glass into tinted glass in the Smoker:</span>
+event.smoking('minecraft:tinted_glass', 'minecraft:glass')
+<span class="green">// Burn sticks into torches on the Campfire:</span>
+event.campfireCooking('minecraft:torch', 'minecraft:stick')</pre>
+  <p>Stonecutting</p>
+  <pre>
+<span class="green">//allow cutting 3 sticks from any plank on the stonecutter</span>
+event.stonecutting('3x minecraft:stick', '#minecraft:planks')</pre>
+  <p>Removing Recipes</p>
+  <pre>
+<span class="green">// A blank condition removes all recipes (obviously not recommended):</span>
+event.remove({})
+<span class="green">// Remove all recipes where output is stone pickaxe:</span>
+event.remove({ output: 'minecraft:stone_pickaxe' })
+<span class="green">// Remove all recipes where output has the Wool tag:</span>
+event.remove({ output: '#minecraft:wool' })
+<span class="green">// Remove all recipes where any input has the Redstone Dust tag:</span>
+event.remove({ input: '#forge:dusts/redstone' })
+<span class="green">// Remove all recipes from Farmer's Delight:</span>
+event.remove({ mod: 'farmersdelight' })
+<span class="green">// Remove all campfire cooking recipes:</span>
+event.remove({ type: 'minecraft:campfire_cooking' })
+<span class="green">// Remove all recipes that grant stone EXCEPT smelting recipes:</span>
+event.remove({ not: { type: 'minecraft:smelting' }, output: 'stone' })
+<span class="green">// Remove recipes that output cooked chicken AND are cooked on a campfire:</span>
+event.remove({ output: 'minecraft:cooked_chicken', type: 'minecraft:campfire_cooking' })
+<span class="green">// Remove any blasting OR smelting recipes that output minecraft:iron_ingot:</span>
+event.remove([{ type: 'minecraft:smelting', output: 'minecraft:iron_ingot' }, { type: 'minecraft:blasting', output: 'minecraft:iron_ingot' }])
+<span class="green">// Remove a recipe by ID. in this case, data/minecraft/recipes/glowstone.json:
+// Note: Recipe ID and output are different!</span>
+event.remove({ id: 'minecraft:glowstone' })</pre>
+  <br><div class="line"></div><!------------------------------------------------->
+  <img src="p/botania.png" alt="botania" width="270px" height="103.5px">
+  <br><br>
+  <p>In startup_script:</p>
+  <pre>
+onEvent("botania.brews.registry", event => {
+    event.create("torrent")
+        <span class="green">/**
+         * The cost of mana per brew.
+         * For Tainted Blood Pendant, it is cost / duration / effectLevel * 2.5 per tick.
+         */</span>
+        .cost(5000)
+        <span class="green">/**
+         * The effect you want to specify for the Brew,
+         * can be specified for multiple times for applying
+         * multiple effects at once.
+         * The parameters come the same as /effect,
+         * except for duration is in ticks, not seconds.
+        */</span>
+        .effect("minecraft:water_breathing", 4800 * 20)
+        .effect("botania:allure", 300 * 20, 0, false, false)
+        <span class="green">/**
+         * Set to deny incense for this brew.
+         */</span>
+        .noIncense()
+        <span class="green">/**
+         * Set to deny pendant infusing for this brew.
+         */</span>
+        .noPendant()
+})</pre>
+  <div class="line"></div><!------------------------------------------------->
+  
+  <h3 class="bold" style="color: rgb(200, 0, 0);">blood magic</h3>
+  <p>- altar</p>
+  <pre>
+event.recipes.bloodmagic.altar(output, input)
+event.recipes.bloodmagic.altar(output, input).upgradeLevel(int).altarSyphon(int).consumptionRate(int).drainRate(int)
+</pre>
+
+  <p>- array</p>
+  <pre>
+event.recipes.bloodmagic.array(output, baseInput, addedInput)
+event.recipes.bloodmagic.array(output, baseInput, addedInput).texture(string)
+</pre>
+
+  <p>- soulforge</p>
+  <pre>
+event.recipes.bloodmagic.soulforge(output, [input])
+event.recipes.bloodmagic.soulforge(output, [input]).minimumDrain(double).drain(double)
+</pre>
+
+  <p>- arc</p>
+  <pre>
+event.recipes.bloodmagic.arc(output, input, tool)
+event.recipes.bloodmagic.arc(output, input, tool, [addedOutput])
+event.recipes.bloodmagic.arc(output, input, tool, [addedOutput]).consumeIngredient(boolean).outputFluid(fluid)</pre>
+
+  <p>- alchemytable</p>
+  <pre>
+event.recipes.bloodmagic.alchemytable(output, [input])
+event.recipes.bloodmagic.alchemytable(output, [input]).syphon(int).ticks(int).upgradeLevel(int)</pre>
+   
+  
+  Example:
+  <pre>
+onEvent('recipes', event => {
+
+  const { altar, array, soulforge, arc, alchemytable } = event.recipes.bloodmagic
+
+  altar('minecraft:carrot', 'minecraft:apple')
+
+  array('minecraft:spruce_planks', 'minecraft:oak_planks', 'minecraft:birch_planks')
+
+  soulforge('minecraft:stone', ['minecraft:gold_ore', 'minecraft:diamond_ore', 'minecraft:iron_ore']).drain(1.0)
+
+  arc('minecraft:netherite_ingot', 'minecraft:iron_ingot', 'minecraft:iron_pickaxe', [Item.of('minecraft:cobblestone').chance(0.4)])
+
+  alchemytable('minecraft:gold_ingot', ['minecraft:iron_ingot', 'minecraft:iron_ingot', 'minecraft:iron_ingot', 'minecraft:iron_ingot']).upgradeLevel(2)
+
+})</pre>
+  <div class="line"></div><!------------------------------------------------->
+  <img src="p/mekanism.png" alt="mekanism" width="306.5px" height="118.5px">
+  <br><br>
+  <p>
+  - crushing
+  - enriching
+  - smelting
+  </p>
+  <pre>
+event.recipes.mekanismCrushing(output, input)
+</pre>
+  <p>- combining</p>
+  <pre>
+event.recipes.mekanismCombining(output, input1, input2)
+</pre>
+  - compressing
+  - purifying
+  - injecting
+  <pre>
+event.recipes.mekanismPurifying(output, inputItem, inputGas)</pre>
+  - metallurgic_infusing
+  <pre>
+event.recipes.mekanismMetallurgicInfusing(output, inputItem, infusionInput, infusionAmount)</pre>
+  - sawing
+  <pre>
+event.recipes.mekanismSawing(output, input, extraOutput)</pre>
+  <div class="line"></div><!------------------------------------------------->
+  
+  <img src="p/tinkers.png" alt="Tinkers' Constructs" width="448" height="176">
+  <pre>
+  event.recipes.tconstruct.casting_table(outputItem, inputFluidId)</pre>
+  <pre>
+  event.recipes.tconstruct.casting_table(outputItem, inputFluidId, inputFluidAmount) <span class="green">// defaults to 144 mB</span></pre>
+   
+  
+  Supported recipe methods:
+  <pre>
+.cast(castIngredient) <span class="green">// defaults to #tconstruct:casts/multi_use/ingot</span>
+
+.noCast()
+
+.multiUseCast(castType)
+
+.singleUseCast(castType)
+
+.consumeCast()
+
+.switchSlots()
+
+.coolingTime(ticks) <span class="green">// defaults to 60</span>
+event.recipes.tconstruct.casting_basin(output, inputFluidId)
+
+event.recipes.tconstruct.casting_basin(output, inputFluidId, inputFluidAmount) <span class="green">// defaults to 1296</span></pre>
+  <div class="line"></div><!------------------------------------------------->
+  
+  <h3 class="boldIE" style="color: rgb(125, 125, 125);">Immersive Engineering</h3>
+  
+  <p>- immersiveengineeringAlloy</p>
+  <pre>
+event.recipes.immersiveengineeringAlloy(output, input1, input2)</pre>
+  
+  <p>- immersiveengineeringBlastFurnace</p>
+  <pre>
+event.recipes.immersiveengineeringBlastFurnace(output, input)
+event.recipes.immersiveengineeringBlastFurnace(output, input, slag)</pre>
+  
+  <p>- immersiveengineeringBlastFurnaceFuel</p>
+  <pre>
+event.recipes.immersiveengineeringBlastFurnaceFuel(input).time(300)</pre>
+  
+  <p>- immersiveengineeringCokeOven</p>
+  <pre>
+event.recipes.immersiveengineeringCokeOven(output, input).creosote(250).time(900)</pre>
+  
+  <p>- immersiveengineeringCloche</p>
+  <pre>
+event.recipes.immersiveengineeringCloche([outputs], input, soil)
+event.recipes.immersiveengineeringCloche([outputs], input, soil, render) <span class="green">// Render format: {type: 'crop', block: 'minecraft:wheat'}</span></pre>
+  
+  <p>- immersiveengineeringFertilizer</p>
+  <pre>
+event.recipes.immersiveengineeringFertilizer(input).growthModifier(1.5)</pre>
+  
+  <p>- immersiveengineeringMetalPress</p>
+  <pre>
+event.recipes.immersiveengineeringMetalPress(output, input, mold)</pre>
+  
+  <p>- immersiveengineeringArcFurnace</p>
+  <pre>
+event.recipes.immersiveengineeringArcFurnace([outputs], input)
+event.recipes.immersiveengineeringArcFurnace([outputs], input, [additives])
+event.recipes.immersiveengineeringArcFurnace([outputs], input, [additives], slag)</pre>
+  
+  <p>- immersiveengineeringCrusher</p>
+  <pre>
+event.recipes.immersiveengineeringCrusher(output, input)
+event.recipes.immersiveengineeringCrusher(output, input, [secondaries]) <span class="green">// Secondary output format: {chance: 0.5, output: 'item:id'}</span></pre>
+  
+  <p>- immersiveengineeringSawmill</p>
+   
+  <pre>
+event.recipes.immersiveengineeringSawmill(output, input)
+
+event.recipes.immersiveengineeringSawmill(output, input, [secondaries]) <span class="green">// Secondary output format: {stripping: true, output: 'item:id'}</span>
+
+event.recipes.immersiveengineeringSawmill(output, input, [secondaries], stripped)</pre>
+  
+  <div class="line"></div><!------------------------------------------------->
+  
+   <h3 class="create" style="color: rgb(230, 180, 34)">create</h3>
+  <p>- createCutting<br>
+  - createMilling<br>
+  - createBasin<br>
+  - createMixing (supports .heated() and .superheated())<br>
+  - createCompacting (supports .heated() and .superheated())<br>
+  - createPressing<br>
+  - createSandpaperPolishing<br>
+  - createSplashing (Bulk Washing)<br>
+  - createDeploying<br>
+  - createFilling<br>
+  - createEmptying<br>
+  <br>
+  Note: Bulk Smoking = vanilla smoking and Bulk Blasting = vanilla blasting recipe types.
+  </p>
+  <pre>
+  event.recipes.createCrushing(output[], input[])
+  <span class="green">//Output doesn't have to be array. It can be either items or fluids
+  //Input doesn't have to be array. It can be either ingredients or Fluid.of('minecraft:water', 1000) or {fluidTag: 'some:fluid_tag', amount: 1000}</span></pre>
+  
+  
+  - createMechanicalCrafting
+  <pre>
+  event.recipes.createMechanicalCrafting(output, pattern[], {patternKey: input})
+  <span class="green">//This recipe type is the same as regular crafting table shaped recipe</span></pre>
+  
+  - createSequencedAssembly
+  <pre>
+  event.recipes.createSequencedAssembly(output[], input, sequence[]) 
+  <span class="green">// output[] are your output items
+  // input is your input item
+  // sequence[] is an array of sequences. These sequences are "regular" recipes that are supported.</span></pre>
+  
+  <p>Examples:</p>
+  <pre>
+event.recipes.createCrushing([
+  '2x minecraft:cobblestone',
+  'minecraft:redstone',
+  Item.of('minecraft:redstone').withChance(0.5)
+], 'minecraft:redstone_ore')
+
+ 
+
+event.recipes.createMixing('create:chromatic_compound', [
+  '#forge:dusts/glowstone',
+  '#forge:dusts/glowstone',
+  '#forge:dusts/glowstone',
+  'create:powdered_obsidian',
+  'create:powdered_obsidian',
+  'create:powdered_obsidian',
+  'create:polished_rose_quartz'
+]).superheated()
+
+ 
+
+event.recipes.createFilling('create:blaze_cake', [
+  'create:blaze_cake_base',
+  Fluid.of('minecraft:lava', 250)
+])
+
+ 
+
+event.recipes.createEmptying([
+  'minecraft:glass_bottle',
+  Fluid.of('create:honey', 250)
+], 'minecraft:honey_bottle')
+ 
+
+event.recipes.createMechanicalCrafting('minecraft:piston', [
+  'CCCCC',
+  'CPIPC',
+  'CPRPC'
+], {
+  C: '#forge:cobblestone',
+  P: '#minecraft:planks',
+  R: '#forge:dusts/redstone',
+  I: '#forge:ingots/iron'
+})
+
+ 
+
+event.recipes.createSequencedAssembly([ <span class="green">// start the recipe</span>
+ Item.of('6x create:large_cogwheel').withChance(32.0), <span class="green">// have this item be an output with a certain chance</span>
+ Item.of('create:brass_ingot').withChance(2.0), <span class="green">// have this item be an output with a certain chance</span>
+ 'minecraft:andesite', <span class="green">// have this item be a guaranteed output</span>
+ 'create:cogwheel', <span class="green">// have this item be a guaranteed output</span>
+ 'minecraft:stick', <span class="green">// have this item be a guaranteed output</span>
+ 'minecraft:iron_nugget' // have this item be a guaranteed output
+], 'create:brass_ingot', [ <span class="green">// 'create:brass_ingot' is the input.</span>
+<span class="green">// the transitional item set by "transitionalItem('create:incomplete_large_cogwheel')" is the item that will be used during the recipe as the item that the input is using to transition to the output.</span>
+ event.recipes.createDeploying('create:incomplete_large_cogwheel', ['create:incomplete_large_cogwheel', '#minecraft:planks']), <span class="green">// like a normal recipe function, is used as a sequence step in this array. Input and output have the transitional item</span>
+ event.recipes.createDeploying('create:incomplete_large_cogwheel', ['create:incomplete_large_cogwheel', '#minecraft:wooden_buttons']), <span class="green">// like a normal recipe function, is used as a sequence step in this array. Input and output have the transitional item</span>
+ event.recipes.createCutting('create:incomplete_large_cogwheel', 'create:incomplete_large_cogwheel').processingTime(50) <span class="green">// like a normal recipe function, is used as a sequence step in this array. Input and output have the transitional item</span>
+]).transitionalItem('create:incomplete_large_cogwheel').loops(6) <span class="green">// set the transitional item and the loops (amount of repetitions)</span></pre>
+  
+  <p>If you want to use your own transitional item in sequenced_assembly recipes, you must register it in startup event:</p>
+  <pre>
+onEvent('item.registry', event => {
+  <span class="green">// Texture for this item goes in kubejs/assets/kubejs/textures/item/my_part.png</span>
+  event.create('my_part', 'create:sequenced_assembly').displayName('My Part')
+
+})</pre>
+  
+  <div class="line"></div><!------------------------------------------------->
+  <div style="height: 100px;"></div>
+  </body>
+</html>

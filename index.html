@@ -1,0 +1,121 @@
+<html>
+    <header>
+        <meta charset="UTF-8">
+        <title>わんの家</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js" type="text/javascript">
+        </script>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4533212068219298"
+        crossorigin="anonymous"></script>
+        <script>
+        $(document).ready(function(){
+        
+          $(window).keydown(function(event) {
+        
+            var code = (event.keyCode ? event.keyCode : event.which);
+            if (!(code == 83 && event.ctrlKey)) return true;
+            event.preventDefault();
+            $("form input[name=none]").click();
+            return false;
+          });
+        }); 
+        </script>
+        <style>
+            /*back*/
+            body {
+            background-color: #eeeeee;
+            }
+            /*text*/
+            .centered {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            }
+            p {
+            position: absolute;
+            left: 30%;
+            font-size: 20px;
+            font-weight: 530;
+            }
+            .b1 {
+            margin-top: 25px;
+            display: block;
+            }
+            /*color*/
+            .col1 {
+            color: #dd00dd; 
+            }
+            /*style*/
+            .youtube-button {
+            background-color: #ff0000; 
+            color: #ffffff; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            text-decoration: none; 
+            left: 90%;
+            }
+            .youtube-button:hover {
+            background-color: #bb0000;
+            }
+
+            .x-button {
+            display: inline-block;
+            background-color: #444;
+            color: #ffffff; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            font-size: 16px; 
+            cursor: pointer; 
+            text-decoration: none; 
+            }
+            .x-button:hover {
+                background-color: #333; 
+            }
+            /*menu*/
+            .menu {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                background-color: #333;
+                overflow: hidden;
+            }
+            .menu li {
+                float: left;
+            }
+            .menu li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+            .menu li a:hover {
+                background-color: #555;
+            }
+            /*etc..*/
+        </style>
+    </header>
+    <body>
+        <ul class="menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="storage.html">Storage</a></li>
+            <li><a href="links.html">Links</a></li>
+
+        </ul>
+
+        <dev class="centered">
+            <h1 id="home"><span class="col1">wan's</span> homepage</h1>
+        </dev>
+        <br><br>
+        <p>
+            これは<span class="col1">わんこ</span>のホームページ兼もの置き場です。<br>
+            ゆっくりしていってね!<br><br>
+            それっぽく作っただけで特に何もできてないよ<br>
+            html初心者が作っただけのサイト
+        </p>
+        <div style="height: 100px;"></div>
+    </body>
+</html>
